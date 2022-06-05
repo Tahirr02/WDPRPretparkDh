@@ -1,0 +1,76 @@
+@model KaartViewModel
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Kaart titel";
+    double Total = 0;
+    Model.PlanningItems.ToList().ForEach(u => Total += u.Prijs);
+    var user = await UserManager.GetUserAsync(User);
+}
+<div class="my-4">
+    <h1>Welkom @user.Voornaam @user.Achternaam</h1>
+</div>
+
+@* Zoek form *@
+<form asp-controller="Kaart" asp-action="Index">
+    <div class="mb-3 d-flex align-item-center">
+        <input name="attractieNaam" placeholder="Attractie Naam" class="form-control mr-1" type="text">
+        <input class="btn btn-primary" type="submit" value="Zoeken">
+    </div>
+</form>
+
+<h2>Huidige planning</h2>
+
+<table class="table table-striped table-hover mt-4">
+    <tr>
+
+        <th scope="col">Attractie</th>
+
+        <th scope="col">Tijdslot</th>
+
+        <th scope="col">Aantal Tickets</th>
+
+        <th scope="col">Prijs</th>
+
+        <th scope="col">Total</th>
+
+    </tr>
+
+    @foreach (var item in Model.PlanningItems)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attractie.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AantalPlekken)
+            </td>
+            <td>
+                € @Html.DisplayFor(modelItem => item.Attractie.Prijs)
+            </td>
+            <td>
+                @* Totale prijs *@
+                € @Html.DisplayFor(modelItem => item.Prijs)
+            </td>
+
+        </tr>
+    }
+
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <span class="font-weight-bold">€ @Total</span>
+            </td>
+        </tr>
+    </tfoot>
+
+</table>

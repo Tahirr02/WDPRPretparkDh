@@ -32,7 +32,7 @@ namespace WdprPretparkDenhaag
                             roleManager1.CreateAsync(new IdentityRole(role)).Wait();
                 }
                 //  GenereerAttracties(scope);
-                //  GenereerTijdssloten(scope);       
+                //   GenereerTijdssloten(scope);       
             }
             
           builder.Run();                        

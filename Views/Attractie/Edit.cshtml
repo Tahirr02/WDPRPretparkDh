@@ -1,0 +1,84 @@
+@model WdprPretparkDenhaag.Models.Attractie
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Attractie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Naam" class="control-label"></label>
+                <input asp-for="Naam" class="form-control" />
+                <span asp-validation-for="Naam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinimaleLeeftijd" class="control-label"></label>
+                <input asp-for="MinimaleLeeftijd" class="form-control" />
+                <span asp-validation-for="MinimaleLeeftijd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AngstFactor" class="control-label"></label>
+                <input asp-for="AngstFactor" class="form-control" />
+                <span asp-validation-for="AngstFactor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foto" class="control-label"></label>
+                <input asp-for="Foto" class="form-control" />
+                <span asp-validation-for="Foto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinimaleLengte" class="control-label"></label>
+                <input asp-for="MinimaleLengte" class="form-control" />
+                <span asp-validation-for="MinimaleLengte" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prijs" class="control-label"></label>
+                <input asp-for="Prijs" class="form-control" />
+                <span asp-validation-for="Prijs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AantalLikes" class="control-label"></label>
+                <input asp-for="AantalLikes" class="form-control" />
+                <span asp-validation-for="AantalLikes" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Inschrijfplicht" /> @Html.DisplayNameFor(model => model.Inschrijfplicht)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpeningsTijd" class="control-label"></label>
+                <input asp-for="OpeningsTijd" class="form-control" />
+                <span asp-validation-for="OpeningsTijd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SluitingsTijd" class="control-label"></label>
+                <input asp-for="SluitingsTijd" class="form-control" />
+                <span asp-validation-for="SluitingsTijd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reserveercapaciteit" class="control-label"></label>
+                <input asp-for="Reserveercapaciteit" class="form-control" />
+                <span asp-validation-for="Reserveercapaciteit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

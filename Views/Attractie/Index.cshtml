@@ -1,0 +1,95 @@
+@model IEnumerable<WdprPretparkDenhaag.Models.Attractie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinimaleLeeftijd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AngstFactor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinimaleLengte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prijs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AantalLikes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inschrijfplicht)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpeningsTijd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SluitingsTijd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reserveercapaciteit)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinimaleLeeftijd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AngstFactor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Foto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinimaleLengte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prijs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AantalLikes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inschrijfplicht)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningsTijd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SluitingsTijd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reserveercapaciteit)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

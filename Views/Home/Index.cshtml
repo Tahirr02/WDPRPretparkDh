@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    
+}
+
+<div class="container">
+    <div class="row">
+       @foreach (var item in Model)
+       {
+            <div class="card m-2" style="width: 18rem;">
+            <img src="~/attractie.webp" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">@item.Naam</h5>
+                <p id="info" class="card-text">Angst Factor: @item.AngstFactor</p>
+                <input id="attractieId" type="text" value="@item.Id" hidden>
+                <a href="/kaart/Details/@item.Id" class="btn btn-primary">Info</a>
+            </div>
+        </div>
+       }
+    </div>
+</div>
+
+
+

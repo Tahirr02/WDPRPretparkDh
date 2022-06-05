@@ -1,0 +1,23 @@
+@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<h1>@ViewData["Title"]</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+<p>
+   U heeft een bevestigingsmail ontvangen. Na het bevestigen kunt u inloggen <a href="https://aka.ms/aspaccountconf">these docs</a> 
+</p>
+    }
+    else
+    {
+<p>
+        Please check your email to confirm your account.
+</p>
+    }
+}
+
+<a href="identity/account/login" class="Button">login</a>

@@ -1,0 +1,67 @@
+@model BookingViewmodel
+
+@{
+    var AttractieViewModel = (AttractieViewModel) ViewData["Attractie"];
+    int beschikbaarPlekken = (AttractieViewModel.Attractie.Reserveercapaciteit - AttractieViewModel.Attractie.Reservaties);
+}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="info col-md-7">
+            <img src="~/attractie.webp" class="col" alt="@AttractieViewModel.Attractie.Naam">
+            <div class="social d-flex align-items-center m-2">
+                <span id="likes">@AttractieViewModel.Attractie.AantalLikes </span> Likes
+                <button id="likeBtn" class="btn btn-primary ml-2">Like</button>
+            </div>
+            <h1>@AttractieViewModel.Attractie.Naam</h1>
+
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus,
+                veniam in! Atque odio quod, accusantium assumenda quibusdam commodi voluptate quos?
+            </p>
+        </div>
+
+        <div class="book col-md-5">
+            <form asp-action="maakBooking" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="text" asp-for="AttractieId" name="AttractieId" value="@AttractieViewModel.Attractie.Id" id="Id" hidden>
+                <div class="mb-3">
+                    <label asp-for="Tijdslot" class="form-label">Tijdslot</label>
+                    <select id="TijdslotVak" class="form-control" name="Tijdslot" asp-for="Tijdslot" aria-label="tijdslot dropdown">
+                        <option selected></option>
+                        @foreach (var item in AttractieViewModel.Tijdsloten)
+                        {
+                            <option value="@item.Id">@item.BeginTijd - @item.EindTijd</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Tijdslot" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="AantalPlekken" class="form-label">Aantal Plekken</label>
+                    <input id="AantalPlekkenVak" type="number" asp-for="AantalPlekken" name="AantalPlekken" class="form-control" min="1"
+                        max="@beschikbaarPlekken" value="1">
+                    <span asp-validation-for="AantalPlekken" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3 d-flex flex-column">
+                    <label for="" class="form-label">Minimale Lengte: @AttractieViewModel.Attractie.MinimaleLengte</label>
+                    <label for="" class="form-label">Minimale Leeftijd: @AttractieViewModel.Attractie.MinimaleLeeftijd</label>
+                    <label for="" class="form-label">
+                        Beschikbaar plekken: <span id="plekkenInfo">@beschikbaarPlekken</span>
+                    </label>
+                    <label for="" class="form-label">Prijs: <span id="AttractiePrijs">@AttractieViewModel.Attractie.Prijs</span></label>
+                    <label for="" class="form-label">Total: €<span id="Prijs">@(AttractieViewModel.Attractie.Prijs)</span></label>
+                </div>
+                <button type="submit" id="bookBtn" class="btn btn-primary">Book</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/notify.js"></script>

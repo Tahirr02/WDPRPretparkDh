@@ -31,7 +31,7 @@ namespace WdprPretparkDenhaag
             services
                 .AddDbContext<WdprPretparkDenhaagIdentityDbContext>(options =>
                     options
-                        .UseSqlite(Configuration
+                        .UseSqlServer(Configuration
                             .GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -40,8 +40,8 @@ namespace WdprPretparkDenhaag
             services
                 .AddDefaultIdentity<ApplicationUser>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = false;
-                    options.SignIn.RequireConfirmedEmail = false;
+                    options.SignIn.RequireConfirmedAccount = true;
+                    options.SignIn.RequireConfirmedEmail = true;
                 })
                 .AddRoles<IdentityRole>()
                 .AddRoleManager<RoleManager<IdentityRole>>()

@@ -111,9 +111,10 @@ namespace WdprPretparkDenhaag.Controllers
                     return BadRequest("Bezoeker is te jong");
                 }
 
-                if ((attractie.Reserveercapaciteit - attractie.Reservaties) == 0)
+                if ((attractie.Reserveercapaciteit - attractie.Reservaties - booking.AantalPlekken)  <= 0)
                 {
-                    return BadRequest("Reservatie is Vol");
+                    var beschikbarePlekken = attractie.Reserveercapaciteit - attractie.Reservaties;
+                    return BadRequest($"Gereserveerde plekken ({booking.AantalPlekken}) is groter dan het aantal beschikbare plekken ({beschikbarePlekken})");
                 }
 
                 // Update reservaties

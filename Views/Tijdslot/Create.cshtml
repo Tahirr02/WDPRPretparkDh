@@ -1,4 +1,4 @@
-@model WdprPretparkDenhaag.Models.Tijdslot
+@model TijdslotViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,14 +13,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BeginTijd" class="control-label"></label>
-                <input asp-for="BeginTijd" class="form-control" />
-                <span asp-validation-for="BeginTijd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EindTijd" class="control-label"></label>
-                <input asp-for="EindTijd" class="form-control" />
-                <span asp-validation-for="EindTijd" class="text-danger"></span>
+                <label asp-for="Datum" class="control-label"></label>
+                <input asp-for="Datum" class="form-control" />
+                <span asp-validation-for="Datum" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -42,6 +42,7 @@ namespace WdprPretparkDenhaag.Controllers
             // Haal planningitems 
             var planningItems = _context.PlanningItems.Where(u => u.UserId == user.Id);
 
+
             // haal de attracties op die voldoen aan de filter van de searchbar
             if (!string.IsNullOrEmpty(attractieNaam))
             {
@@ -56,7 +57,7 @@ namespace WdprPretparkDenhaag.Controllers
             // maak een kaartview model aan die mee wordt gestuurd naar de kaartview
             KaartViewModel kaartViewModel = new KaartViewModel();
             kaartViewModel.Attracties = await attracties.ToListAsync();
-            kaartViewModel.Tijdsloten = await _context.Tijdsloten.ToListAsync();
+            kaartViewModel.Tijdsloten = await _context.Tijdsloten.OrderBy(u => u.BeginTijd).ToListAsync();
             kaartViewModel.PlanningItems = planningItems;
 
             // stuur de kaartviewmodel door naar de view
@@ -81,7 +82,7 @@ namespace WdprPretparkDenhaag.Controllers
                 new AttractieViewModel()
                 {
                     Attractie = attractie,
-                    Tijdsloten = await _context.Tijdsloten.ToListAsync()
+                    Tijdsloten = await _context.Tijdsloten.OrderBy(u => u.BeginTijd).ToListAsync()
                 };
 
             ViewData["Attractie"] = AttractieViewModel;

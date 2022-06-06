@@ -7812,11 +7812,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tahir\\OneDrive\\Bureaublad\\Nieuwe map\\WDPRPretparkDh\\WdprPretparkDenhaag.csproj",
+      "projectUniqueName": "C:\\Users\\Tahir\\OneDrive\\Bureaublad\\HaagscheHogeSchool\\WDPRPretParkDenhaag\\Application\\WDPRPretparkDh\\WdprPretparkDenhaag.csproj",
       "projectName": "WdprPretparkDenhaag",
-      "projectPath": "C:\\Users\\Tahir\\OneDrive\\Bureaublad\\Nieuwe map\\WDPRPretparkDh\\WdprPretparkDenhaag.csproj",
+      "projectPath": "C:\\Users\\Tahir\\OneDrive\\Bureaublad\\HaagscheHogeSchool\\WDPRPretParkDenhaag\\Application\\WDPRPretparkDh\\WdprPretparkDenhaag.csproj",
       "packagesPath": "C:\\Users\\Tahir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tahir\\OneDrive\\Bureaublad\\Nieuwe map\\WDPRPretparkDh\\obj\\",
+      "outputPath": "C:\\Users\\Tahir\\OneDrive\\Bureaublad\\HaagscheHogeSchool\\WDPRPretParkDenhaag\\Application\\WDPRPretparkDh\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using WdprPretparkDenhaag.Models;
 
 namespace WdprPretparkDenhaag.Controllers
 {
+    [Authorize(Roles= "Admin")]
     public class TijdslotController : Controller
     {
         private readonly WdprPretparkDenhaagIdentityDbContext _context;
@@ -20,9 +22,18 @@ namespace WdprPretparkDenhaag.Controllers
         }
 
         // GET: Tijdslot
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string datum)
         {
-            return View(await _context.Tijdsloten.ToListAsync());
+            DateTime date = DateTime.Now.Date;
+
+            if(!string.IsNullOrEmpty(datum)){
+                date = DateTime.Parse(datum).Date;
+            }
+
+            var tijdsloten = _context.Tijdsloten.Where(u => u.BeginTijd.Date == date);
+            ViewData["zoekDatum"] = date;
+
+            return View(await tijdsloten.ToListAsync());
         }
 
         // GET: Tijdslot/Details/5
@@ -54,16 +65,32 @@ namespace WdprPretparkDenhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BeginTijd,EindTijd")] Tijdslot tijdslot)
+        public async Task<IActionResult> Create([Bind("Datum")] TijdslotViewModel TijdslotModel)
         {
             if (ModelState.IsValid)
             {
-                tijdslot.Id = Guid.NewGuid();
-                _context.Add(tijdslot);
-                await _context.SaveChangesAsync();
+                DateTime date = new DateTime(
+                    TijdslotModel.Datum.Year,
+                    TijdslotModel.Datum.Month,
+                    TijdslotModel.Datum.Day,
+                    9,0,0
+                );
+
+                for (int i = 0; i < 36; i++)
+                {
+
+                    int minutes = i * 15;
+                    Tijdslot tijdslot = new Tijdslot();
+                    tijdslot.BeginTijd = date.AddMinutes(minutes);
+                    tijdslot.EindTijd = tijdslot.BeginTijd.AddMinutes(15);
+
+                    _context.Tijdsloten.Add(tijdslot);
+                    await _context.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(tijdslot);
+            return View(TijdslotModel);
         }
 
         // GET: Tijdslot/Edit/5
@@ -151,4 +178,5 @@ namespace WdprPretparkDenhaag.Controllers
             return _context.Tijdsloten.Any(e => e.Id == id);
         }
     }
+
 }

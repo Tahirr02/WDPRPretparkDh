@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    var datum = (DateTime) ViewData["zoekDatum"];
 }
 
 <h1>Index</h1>
@@ -9,6 +10,20 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+
+<div>
+    <h2>Zoek Datum: @datum.ToString("dd/MM/yyyy")</h2>
+    @* Zoek form *@
+<form asp-controller="Tijdslot" asp-action="Index">
+    <div class="mb-3 d-flex align-item-center">
+        <input type=date name="datum" placeholder="datum" class="form-control mr-1">
+        <input class="btn btn-primary" type="submit" value="Zoeken">
+    </div>
+</form>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
